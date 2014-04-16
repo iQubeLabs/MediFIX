@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 13, 2014, 8:50:45 PM
+    Author     : RotelandO
+*/
+
+.account-login-header {
+    width: 380px;
+    display: block;
+    margin: 30px auto 0 auto;
+}
+
+.account-login-header img {
+    margin-bottom: 10px;
+}
