@@ -2,27 +2,35 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="/"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li class="dropdown subnavbar-open-right">
+        <li <?php if(isset($selected_menu) && $selected_menu == 'dashboard') echo 'class="active"'; ?>><a href="/"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        <li class="dropdown subnavbar-open-right <?php if(isset($selected_menu) && $selected_menu == 'facilities') echo "active"; ?>" >
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
-                <i class="icon-truck"></i><span>Med. Item Banks</span> <b class="caret"></b>
+                <i class="icon-building"></i><span>Facilities</span> <b class="caret"></b>
             </a>
           <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-list-alt"></i> Blood Banks </a></li>
-            <li><a href="#"><i class="icon-list-alt"></i> Organ Banks</a></li>
+              <li>
+                  <?php echo $this->Html->link('<i class="icon-building"></i><span> Medical Facilities </span>',
+                    array('controller'=>'facilities', 'action'=>'index'),
+                    array('escape'=>false));?>
+              </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-building"></i><span> Branches </span>',
+                    array('controller'=>'facilities', 'action'=>'branches'),
+                    array('escape'=>false));?>
+            </li>
           </ul>
         </li>
-        <li class="dropdown subnavbar-open-right">
+        <li class="dropdown subnavbar-open-right <?php if(isset($selected_menu) && $selected_menu == 'inventory') echo 'active'; ?>" >
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
-                <i class="icon-th"></i><span>Inventory</span> <b class="caret"></b>
+                <i class="icon-medkit"></i><span>Inventory</span> <b class="caret"></b>
             </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><i class="icon-th"></i> Manage </a></li>
-            <li><a href="#"><i class="icon-reorder"></i> Inventory Types </a></li>
+            <li><a href="#"><i class="icon-medkit"></i> Manage </a></li>
+            <li><a href="#"><i class="icon-medkit"></i> Inventory Types </a></li>
           </ul>
         </li>
         
-        <li>
+        <li <?php if(isset($selected_menu) && $selected_menu == 'account') echo 'class="active"'; ?>>
             <?php echo $this->Html->link('<i class="icon-group"></i><span> Accounts </span>',
                     array('controller'=>'accounts', 'action'=>'index'),
                     array('escape'=>false));?>

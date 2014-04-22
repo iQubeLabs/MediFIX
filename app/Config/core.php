@@ -222,7 +222,7 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', '8929bb7900cb351e82fee3ce8b4d01533dac88f2');
+	Configure::write('Security.salt', null);
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.

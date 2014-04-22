@@ -17,3 +17,51 @@ and open the template in the editor.
 .account-login-header img {
     margin-bottom: 10px;
 }
+
+.facility-title {
+    color: #00BA8B;
+}
+
+.facility-image {
+     height: 150px;
+     width: 150px;
+}
+
+#facility-info ul {
+    margin: 0px 20px;
+    padding: 0px;
+    list-style: none;
+}
+
+#facility-info li {
+    margin: 0px;
+    padding: 0px 0px 15px;
+    font-size: 1.2em;
+    color: #00BA8B;
+}
+
+#facility-info span {
+    display: inline-block;
+    width: 100px;
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #000000;
+}
+
+#branches, .branch {
+    margin: 10px 0px;
+}
+
+.branch {
+    
+}
+
+#picker {
+/*	margin:0;
+	padding:0;*/
+	/*border:0;*/
+/*	width:70px;
+	height:20px;*/
+	border-right:20px solid green;
+	/*line-height:20px;*/
+}

@@ -9,21 +9,13 @@
 App::uses('AppController', 'Controller');
 
 /**
- * CakePHP DashboardController
+ * CakePHP BranchesController
  * @author RotelandO
  */
-class DashboardController extends AppController {
+class BranchesController extends AppController {
 
-    public $name = 'Dashboard';
-    
-    public function beforeFilter() {
-        parent::beforeFilter();
-        
-        $this->_setViewVariables('Dashboard', 'dashboard');
-    }
     
     public function index() {
         
     }
-
 }

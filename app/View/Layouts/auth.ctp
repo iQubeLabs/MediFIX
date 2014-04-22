@@ -30,8 +30,8 @@
         <?php echo $this->Html->image('medifix_login.png'); ?> 
         
         <!--Session flash messages-->
-        <?php echo $this->Session->flash('auth'); ?>
         <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Session->flash('auth'); ?>
     </div>
     
     <?php echo $this->fetch('content'); ?>

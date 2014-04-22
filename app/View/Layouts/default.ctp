@@ -37,7 +37,12 @@
         
         <?php echo $this->Html->css('style'); ?>
         
+        <?php echo $this->Html->css('medifix'); ?>
+        
         <?php echo $this->Html->css('pages/dashboard'); ?>
+        
+        <!--Creating Facility-->
+        <?php echo $this->Html->css('/js/color-picker/css/colpick'); ?>
         
         <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
         
@@ -107,24 +112,69 @@
     
     <?php echo $this->Html->script('highcharts_3.0.10/js/highcharts');?>
     
+    <?php echo $this->Html->script('/js/color-picker/js/colpick'); ?>
+    
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSL0XtmKDGpC6aW2Khv64f7JD66ZMDbqI&sensor=false">
     </script>
     
+   
+    <?php if(!isset($module_action) && $module_action !== 'medical_facility_create'): ?>
+        <script type="text/javascript">
+              function initialize() {
+                var mapOptions = {
+                  center: new google.maps.LatLng(9.061478, 7.512906),
+                  zoom: 7,
+                  scrollwheel: false
+                };
+                var map = new google.maps.Map(document.getElementById("inventory_map_canvas"),
+                    mapOptions);
+              }
+
+              google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    <?php endif; ?>
+    
+    
+    
     <script>     
-
-        function initialize() {
-            var mapOptions = {
-              center: new google.maps.LatLng(9.061478, 7.512906),
-              zoom: 7
+    $(document).ready(function() {
+            
+        var latlong = '';
+        
+        function initializeloc() {
+            var locmapOptions = {
+                zoom: 5,
+                center: new google.maps.LatLng(9.061478, 7.512906),
+                zoomControl: true,
+                scrollwheel: false,
             };
-            var map = new google.maps.Map(document.getElementById("inventory_map_canvas"),
-                mapOptions);
+            var locmap = new google.maps.Map(document.getElementById("loc_canvas"),
+                locmapOptions);
+                
+            google.maps.event.addListener(locmap, 'click', function(event) {
+                latlong = event.latLng.lat() + ', ' + event.latLng.lng();
+                alert(latlong);
+                $('loc_modal modal-body p').html(latlong);
+                window.setTimeout(function() {
+                    locmap.panTo(event.latLng);
+                  }, 3000);
+                
+            });
           }
+          google.maps.event.addDomListener(window, 'load', initializeloc);
           
-          google.maps.event.addDomListener(window, 'load', initialize);
-
-        $(document).ready(function() {
+            $('#picker').colpick({
+                layout:'hex',
+                submit:0,
+                onChange:function(hsb,hex,rgb,el,bySetColor) {
+                    $(el).css('border-color','#'+hex);
+                    // Fill the text box just if the color was set using the picker, and not the colpickSetColor function.
+                    if(!bySetColor) $(el).val(hex);
+                }
+            }).keyup(function(){
+                $(this).colpickSetColor(this.value);
+            });
             
              $('#inventory_dist_by_type').highcharts({
                 chart: {
