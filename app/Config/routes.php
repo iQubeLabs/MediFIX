@@ -24,7 +24,88 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'dashboard', 'action' => 'index'));
+	Router::connect('/', array('controller' => 'accounts', 'action' => 'landing'));
+    
+    Router::connect('/facilities', array('controller' => 'medical_facilities', 'action' => 'index'));
+    
+    Router::connect('/facilities/branches/add', array('controller' => 'branches', 'action' => 'add'));
+    Router::connect('/facilities/branches/add/:id', 
+                array('controller' => 'branches', 'action' => 'add'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+    
+    Router::connect('/facilities/branches/list', array('controller' => 'branches', 'action' => 'index'));
+    
+    Router::connect('/facilities/branches/edit/:id', 
+                array('controller' => 'branches', 'action' => 'edit'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+
+    /*Router::connect('/:controller/:id',
+                array('action' => 'edit'),
+                array('id' => '[0-9]+')
+            );*/
+    
+    Router::connect('/facilities/branches/delete/:id', 
+                array('controller' => 'branches', 'action' => 'delete'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+    
+    Router::connect('/facilities/:action/*', array('controller' => 'medical_facilities'));
+    
+    //Inventory Items Routing
+    Router::connect('/inventories/items', array('controller' => 'inventory_items', 'action' => 'index'));
+    Router::connect('/inventories/items/edit/:id', 
+                array('controller' => 'inventory_items', 'action' => 'edit'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+    Router::connect('/inventories/items/delete/:id', 
+                array('controller' => 'inventory_items', 'action' => 'delete'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+    Router::connect('/inventories/items/add/:id', 
+                array('controller' => 'inventory_items', 'action' => 'add'),
+                array(
+                    // order matters since this will simply map ":id" to
+                    // $articleId in your action
+                    'pass' => array('id'),
+                    'id' => '[0-9]+'
+                )
+            );
+    
+    Router::connect('/inventories/items/:action/*', array('controller' => 'inventory_items'));
+    
+    Router::connect('/inventories/attributes', array('controller' => 'inventory_attributes', 'action' => 'index'));
+    Router::connect('/inventories/attributes/:action/*', array('controller' => 'inventory_attributes'));
+    
+    
+//    Router::connect('/facilities/branches/', array('controller' => 'medicalfacilities', 'action' => 'branches'));
+    
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
