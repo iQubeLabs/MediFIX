@@ -1,0 +1,90 @@
+$(document).ready(function(){
+
+  $("#InventoryInventoryItemId").change(function() {
+    $("tbody:hidden, a:hidden").show();
+    var selected = $("#InventoryInventoryItemId").val();
+    if (selected == '') {
+      $("#select").html('Please select an inventory item.');
+    } else {
+      $("#select").html('An inventory item has been selected.');
+    }
+    //var options = document.getElementById('InventoryInventoryItemId');
+    //var selected = options.options[options.selectedIndex].value;
+    //console.log(selected);
+    $.ajax({url: '/medifix/inventories/list_attributes', success: function(result){
+    var inv = result;
+    var span = $('<span></span>');
+      var optNull = $('<option></option>');
+      optNull.attr('value', '');
+      span.append(optNull);
+      optNull.html('(choose one)');
+      
+      for (i in inv) {
+        for (j in inv[i]) {
+          if (i == selected) {
+            //console.log(j + inv[i][j]);
+            var opt = $('<option></option>');
+            opt.attr('value', j);
+            span.append(opt);
+            opt.html(inv[i][j]);
+          }
+        }
+      }
+      select = $('.Inventory');
+      for (i = 0; i < select.length; i++) {
+        $(select[i]).html(span.html());
+      }
+    }});
+  });
+
+  $("body").on("click","#remove_attr_btn", function(e){ //user click on remove text{
+    $(this).parent().parent('tr').remove(); //remove text box
+  });
+
+  var m = 1;
+
+  $('#insert_attr_btn').click(function() {
+    var tbody = $('#addHere');
+    var tr = $('<tr></tr>');
+    tbody.append(tr);
+
+    var td = $('<td></td>');
+    tr.append(td);
+    td.html(m+=1);
+
+    td = $('<td></td>');
+    tr.append(td);
+    var select = $('#InventoryNotes').clone();
+    select.attr('id', 'InventoryNotes'+i);
+    td.html(select);
+    
+    /*var select = $('<select></select>');
+    select.attr('class', 'Inventory');
+    select.attr('name', 'data[Inventory][inventory_attribute_id][]');
+    var options = $('#InventoryNotes').html();
+    td.append(select);
+    select.html(options);*/
+
+    var td = $('<td></td>');
+    var input = $('#attr_value').clone();
+    /*input.attr('type', 'text');
+    input.attr('class', 'span1');
+    input.attr('name', 'data[Inventory][inventory_value_id][]');
+    input.attr('id', 'mdate');*/
+    tr.append(td);
+    td.html(input);
+
+    var td = $("<td></td>");
+    tr.append(td);
+    td.html("<a class='btn btn-primary btn-mini pull-right' id='remove_attr_btn'><i class='icon icon-minus'></i></a>");
+  });
+
+});
+//var inventory = {"1":{"1":"Blood Weight","2":"Genotype","3":"Blood Group"},"4":{"4":"Weight(Heart)","6":"Genotype(Heart)","7":"Blood Group(Heart)"},"3":{"5":"Weight(Kidney)","8":"Genotype(Kidney)","9":"Blood Group(Kidney)"},"6":{"10":"Weight(Pancreas)","11":"Genotype(Pancreas)","13":"Blood Group(Pancreas)"}};
+
+//[{"id":1,"value":"Blood Weight"},{"id":2,"value":"Genotype"},{"id":3,"value":"Blood Group"},{"id":4,"value":"Weight(Heart)"},{"id":5,"value":"Weight(Kidney)"},{"id":6,"value":"Genotype(Heart)"},{"id":7,"value":"Blood Group(Heart)"},{"id":8,"value":"Genotype(Kidney)"},{"id":9,"value":"Blood Group(Kidney)"},{"id":10,"value":"Weight(Pancreas)"},{"id":11,"value":"Genotype(Pancreas)"},{"id":12,"value":"Blood Group(Pancreas)"}];
+
+//Displays the inventory attribute form field when an item is selected.
+
+
+//Adds more form fields for inventory attributes
