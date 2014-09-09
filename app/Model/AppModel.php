@@ -20,7 +20,6 @@
  */
 
 App::uses('Model', 'Model');
-
 /**
  * Application model for Cake.
  *
@@ -30,4 +29,17 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+    
+    public $recursive = -1;
+    
+    public function beforeFind($query) {
+        
+        if (!isset($query['conditions']))
+            $query['conditions'] = array();
+
+        $query['conditions'][$this->alias . '.deleted'] = null;
+        
+        return $query;
+        
+    }
 }
