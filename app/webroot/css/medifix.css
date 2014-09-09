@@ -1,0 +1,112 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 13, 2014, 8:50:45 PM
+    Author     : RotelandO
+*/
+
+.account-login-header {
+    width: 380px;
+    display: block;
+    margin: 30px auto 0 auto;
+}
+
+.account-login-header img {
+    margin-bottom: 10px;
+}
+
+.facility-title {
+    color: #00BA8B;
+}
+
+.facility-image {
+     height: 150px;
+     width: 150px;
+}
+
+#facility-info ul {
+    margin: 0px 20px;
+    padding: 0px;
+    list-style: none;
+}
+
+#facility-info li {
+    margin: 0px;
+    padding: 0px 0px 15px;
+    font-size: 1.2em;
+    color: #00BA8B;
+}
+
+#facility-info span {
+    display: inline-block;
+    width: 100px;
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #000000;
+}
+
+#branches, .branch {
+    margin: 10px 0px;
+}
+
+.branch {
+    
+}
+
+#picker {
+/*	margin:0;
+	padding:0;*/
+	/*border:0;*/
+/*	width:70px;
+	height:20px;*/
+	border-right:20px solid green;
+	/*line-height:20px;*/
+}
+
+
+p span.inv_label {
+    margin: 5px 20px;
+    padding: 0px;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: inline-block;
+    width: 200px;
+}
+
+.inv_view p {
+    font-size: 1.1em;
+}
+
+.io_item {
+    height: 200px;
+    background: #efefef;
+    padding: 10px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.io_title {
+    font-size: 2.4em;
+    font-weight: bolder;
+    text-align: center;
+    padding: 5px 0px;
+}
+.io_left {
+    font-size: 2.0em;
+    font-weight: bolder;
+    text-align: center;
+    padding: 5px 0px;
+}
+
+.actions {
+    text-align: center;
+}
+
+.iob_item {
+    font-size: 1.2em;
+    font-weight: bold;
+}

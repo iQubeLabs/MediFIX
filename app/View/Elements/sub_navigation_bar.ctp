@@ -2,21 +2,68 @@
   <div class="subnavbar-inner">
     <div class="container">
       <ul class="mainnav">
-        <li class="active"><a href="index.html"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="reports.html"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
-        <li class="subnavbar-open-right"><a href="guidely.html"><i class="icon-facetime-video"></i><span>App Tour</span> </a></li>
-        <li><a href="charts.html"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
-        <li><a href="shortcodes.html"><i class="icon-code"></i><span>Shortcodes</span> </a> </li>
-        <li class="dropdown subnavbar-open-right"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
+        <li <?php if(isset($selected_menu) && $selected_menu == 'dashboard') echo 'class="active"'; ?>><a href="/medifix"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
+        
+        <li class="dropdown subnavbar-open-right <?php if(isset($selected_menu) && $selected_menu == 'inventory') echo 'active'; ?>" >
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+                <i class="icon-medkit"></i><span>Inventory</span> <b class="caret"></b>
+            </a>
           <ul class="dropdown-menu">
-            <li><a href="icons.html">Icons</a></li>
-            <li><a href="faq.html">FAQ</a></li>
-            <li class="subnavbar-open-right"><a href="pricing.html">Pricing Plans</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-            <li class="subnavbar-open-right"><a href="error.html">404</a></li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-medkit"></i> Inventory ',
+                    array('controller'=>'inventories', 'action' => 'index'),
+                    array('escape'=>false));?>
+            </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-medkit"></i> Product Items ',
+                    array('controller'=>'inventories', 'action' => 'flow'),
+                    array('escape'=>false));?>
+            </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-medkit"></i> Product Types ',
+                    array('controller'=>'inventories', 'action' => 'items'),
+                    array('escape'=>false));?>
+            </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-medkit"></i> Product Attributes ',
+                    array('controller'=>'inventories', 'action' => 'attributes'),
+                    array('escape'=>false));?>
+            </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-medkit"></i> Records ',
+                    array('controller'=>'records', 'action' => 'index'),
+                    array('escape'=>false));?>
+            </li>
           </ul>
         </li>
+        
+        <?php if ($current_user['AccountType']['name'] == 'Super Admin'): ?>
+        <li class="dropdown subnavbar-open-right <?php if(isset($selected_menu) && $selected_menu == 'facilities') echo "active"; ?>" >
+            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> 
+                <i class="icon-building"></i><span>Facilities</span> <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+              <li>
+                  <?php echo $this->Html->link('<i class="icon-building"></i><span> Medical Facilities </span>',
+                    array('controller'=>'facilities', 'action'=>'index'),
+                    array('escape'=>false));?>
+              </li>
+            <li>
+                <?php echo $this->Html->link('<i class="icon-building"></i><span> Branches </span>',
+                    array('controller'=>'facilities', 'action'=>'branches', 'list'),
+                    array('escape'=>false));?>
+            </li>
+          </ul>
+        </li>
+        <?php endif; ?>
+        
+        <li <?php if(isset($selected_menu) && $selected_menu == 'account') echo 'class="active"'; ?>>
+            <?php echo $this->Html->link('<i class="icon-group"></i><span> Accounts </span>',
+                    array('controller'=>'accounts', 'action'=>'index'),
+                    array('escape'=>false));?>
+        </li>
+        
+        <li><a href="#"><i class="icon-cog"></i><span>Settings</span> </a> </li>
       </ul>
     </div>
     <!-- /container --> 

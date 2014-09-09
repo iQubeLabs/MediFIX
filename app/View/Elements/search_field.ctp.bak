@@ -1,0 +1,19 @@
+<script type="text/javascript">
+	var productType = <?php echo json_encode($product_type) ?>;
+	var productAttribute = <?php echo json_encode($product_attribute) ?>;
+</script>
+
+<div id='search' class = 'container' style='width:50%; display:none'>
+	<?php echo $this->Form->Create('Inventory',
+            array(
+            	'controller' => 'inventories',
+            	'action' => 'search',
+            	'class' => 'form-horizontal')) ;?>
+	<!-- <a class='btn btn-primary btn-mini' style='display:none' id='insert_search_btn'><i class='icon icon-plus'></i>Add More Search Options</a> -->
+	<table id='search_table' class='table table-striped table-bordered' style='display:none'>
+		<tbody id = 'search_add'>	
+		</tbody>
+	</table>
+	<button type="submit" class="btn btn-primary">Search</button> 
+	<?php echo $this->Form->end(); ?>
+</div>

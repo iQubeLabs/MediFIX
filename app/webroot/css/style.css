@@ -511,6 +511,11 @@ textarea {
 	text-align: center;
 }
 
+.error-message {
+	color: red;
+	font-weight: bold;
+}
+
 .error-container h1 {
 	margin-bottom: .5em;
 	
@@ -1283,4 +1288,3 @@ color: #333;
 	}
 	
 }
-

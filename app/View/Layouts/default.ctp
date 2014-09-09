@@ -16,22 +16,48 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+//$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Dashboard - Bootstrap Admin Template</title>
+        <title>MediFIX - Dashboard</title>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel='icon' type='image/png' href="/medifix/img/favicon.png" />
+        
+        <?php echo $this->Html->css('bootstrap.min'); ?>
+        <?php echo $this->Html->css('bootstrap-responsive.min'); ?>
+        
+        <?php echo $this->Html->css('http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600',
+                array("fullBase" => true));?>
+        
+        <?php echo $this->Html->css('font-awesome.min'); ?>
+        
+        <?php echo $this->Html->css('style'); ?>
+        
+        <?php echo $this->Html->css('medifix'); ?>
+        
+        <?php echo $this->Html->css('pages/dashboard'); ?>
+        
+        <!--Creating Facility-->
+        <?php echo $this->Html->css('/js/color-picker/css/colpick'); ?>
+        
+        <?php echo $this->Html->css('jquery.dataTables'); ?>
+        
+        <?php echo $this->Html->css('/js/bootstrap-datepicker/css/datepicker3'); ?>
+        
+        <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
+        
+<!--        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
                 rel="stylesheet">
         <link href="css/font-awesome.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        <link href="css/pages/dashboard.css" rel="stylesheet">
+        <link href="css/pages/dashboard.css" rel="stylesheet">-->
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
               <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -59,14 +85,17 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	
     <!--Top Navigation bar-->
-    <?php echo $this->element('navigation_bar'); ?>;
+    <?php echo $this->element('navigation_bar'); ?>
     
     <!--Sub Navigation Bar - Menu-->
-    <?php echo $this->element('sub_navigation_bar'); ?>;
+    <?php echo $this->element('sub_navigation_bar'); ?>
+
+    <!-- Search Field -->
+    <?php echo $this->element('search_field'); ?>
     
     <?php echo $this->fetch('content'); ?>
     
-    <?php echo $this->element('footer_extra'); ?>
+    <?php // echo $this->element('footer_extra'); ?>
     
     <?php echo $this->element('footer'); ?>
     
@@ -74,134 +103,57 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     
     
     <!-- Placed at the end of the document so the pages load faster --> 
-    <script src="js/jquery-1.7.2.min.js"></script> 
-    <script src="js/excanvas.min.js"></script> 
-    <script src="js/chart.min.js" type="text/javascript"></script> 
-    <script src="js/bootstrap.js"></script>
-    <script language="javascript" type="text/javascript" src="js/full-calendar/fullcalendar.min.js"></script>
+    <?php echo $this->Html->script('jquery-1.7.2.min');?>
+    <!--<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
+    
+<!--    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
+    
+    <?php echo $this->Html->script('bootstrap');?>
+    <?php echo $this->Html->script('excanvas.min');?>
+    <?php echo $this->Html->script('chart.min');?>
+    <?php echo $this->Html->script('search_field');?>
+    
+      
+    
+    <?php echo $this->Html->script('full-calendar/fullcalendar.min');?>
+    
+    <?php echo $this->Html->script('base');?>
+    
+    <?php echo $this->Html->script('jquery.dataTables');?>
+    
+    
+    
+    
+    <?php echo $this->Html->script('/js/color-picker/js/colpick'); ?>
+    
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSL0XtmKDGpC6aW2Khv64f7JD66ZMDbqI&sensor=false">
+    </script>
+    
+    <?php echo $this->Html->script('init');?>
 
-    <script src="js/base.js"></script>
-
-    <script>     
-
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    pointColor: "rgba(220,220,220,1)",
-				    pointStrokeColor: "#fff",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    pointColor: "rgba(151,187,205,1)",
-				    pointStrokeColor: "#fff",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }    
-
-        $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var calendar = $('#calendar').fullCalendar({
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-          selectable: true,
-          selectHelper: true,
-          select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-              calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                true // make the event "stick"
-              );
-            }
-            calendar.fullCalendar('unselect');
-          },
-          editable: true,
-          events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-            {
-              title: 'EGrappler.com',
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: 'http://EGrappler.com/'
-            }
-          ]
-        });
-      });
-    </script><!-- /Calendar -->
+    <?php if(isset($module_action) && $module_action == 'branch_add_edit'): ?>
+        
+        <?php echo $this->Html->script('branches');?>
+    
+    <?php elseif(isset($module_action) && $module_action == 'dashboard'): ?>
+    
+        <?php echo $this->Html->script('highcharts_3.0.10/js/highcharts');?>
+        <?php echo $this->Html->script('dashboard');?>
+    
+    <?php elseif(isset($module_action) && $module_action == 'inventory'): ?>
+        
+        <?php echo $this->Html->script('bootstrap-datepicker/js/bootstrap-datepicker');?>
+        <?php echo $this->Html->script('inventories');?>
+        <?php echo $this->Html->script('addfield'); ?>
+        <?php echo $this->Html->script('attr_field'); ?>
+    
+    <?php elseif(isset($module_action) && $module_action == 'facility_create'): ?>
+    
+        <?php echo $this->Html->script('branches');?>
+    
+    <?php endif; ?>
+    
 </body>
 </html>
