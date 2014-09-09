@@ -31,4 +31,110 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    
+    public $uses = array('Account', 'AccountType', 'InventoryAttribute', 'InventoryItem');
+    
+    var $components = array(
+        'Session',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'userModel' => 'Account'
+//                    'fields' => array(
+//                        'username' => 'custom_username_field',
+//                        'password' => 'custom_password_field'
+//                    )
+                )
+            ),
+            'loginRedirect' => array('controller' => 'dashboard', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'accounts', 'action' => 'login'),
+            'authError' => "You can't access that page",
+            'authorize' => array('Controller')
+        )
+    );
+    
+    public function beforeFilter(){
+        
+        parent::beforeFilter();
+        
+        Security::setHash('sha512');
+        
+        //Set Login action to accounts => login
+        $this->Auth->loginAction = array('controller'=>'accounts', 'action'=>'login');
+        //set what non-loggedin facility account has access to
+        $this->Auth->allow('landing');
+        
+        
+        //Initialize all possible variables needed by all controllers
+        $this->_InitializeVariables();
+
+        //Initialize search functions
+        $this->_search();
+        
+    }
+    
+    public function isAuthorized($user = null) {
+        /*debug($user);
+        die();*/
+        // Any registered user can access public functions
+//        if (empty($this->request->params['admin'])) {
+//            return true;
+//        }
+//
+//        // Only admins can access admin functions
+//        if (isset($this->request->params['admin'])) {
+//            return (bool)($user['role'] === 'admin');
+//        }
+
+        // Default deny
+//        return false;
+        return true;
+    }
+    
+    private function _InitializeVariables() {
+        $current_user = $this->_getCurrentUser();
+        
+        //pr($current_user);
+
+        $this->set( 
+            array(
+                'logged_in' => $this->Auth->loggedIn(),
+                'current_user' => $current_user
+            )
+        );
+    }
+
+    private function _search() {
+        $product_type = $this->InventoryItem->find('list');
+        $product_attribute = $this->InventoryAttribute->find('list');
+
+        debug($product_type); debug($product_attribute);
+
+        $this->set( 
+            array(
+                'product_type' => $product_type,
+                'product_attribute' => $product_attribute
+            )
+        );
+    }
+
+    protected function _getCurrentUser() {
+        return $this->Auth->user();
+    }
+    
+    protected function _getCurrentUserId() {
+        return $this->Auth->user('id');
+    }
+    
+    protected function _createNowTimeStamp() {
+        return date('Y-m-d H:i:s');
+    }
+    
+    public function _setViewVariables($pagetitle, $selected_menu) {
+        $this->set(array(
+            'page_title' => $pagetitle,
+            'selected_menu' => $selected_menu
+        ));
+    }
+    
 }
